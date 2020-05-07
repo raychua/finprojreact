@@ -1,0 +1,23 @@
+select {
+  margin: 8px 0;
+  width: 70%;
+  height: 40px;
+  font-size: 15px;
+  cursor: pointer;
+  background-color: white;
+  border: none;
+  border-bottom: 2px solid #ccc;
+  color: #555555;
+  padding: 10px;
+}
+
+select::-ms-expand {
+  display: none;
+}
+
+select:hover,
+select:focus {
+  color: #267e34;
+  background-color: white;
+  border-bottom-color: #dcdcdc;
+}

@@ -1,0 +1,54 @@
+.container {
+  display: grid;
+  grid-template-columns: 5% 20% 50% 20% 5%;
+  grid-template-rows: auto;
+  grid-template-areas: "leftside" "line1" "line2" "line3" "rightside";
+  column-gap: 0px;
+  row-gap: 15px;
+  justify-items: center;
+  align-items: start;
+  align-content: start;
+}
+
+.ExpenditureRatio {
+  background-color: white;
+  margin-top: 20px;
+  padding-bottom: 20px;
+  border-radius: 6px;
+}
+
+.VerticalSpacer {
+  margin-top: 20px;
+}
+
+.ExpenditureDetailsHeader {
+  margin-top: 20px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #2a6b2c;
+  border-bottom: #2a6b2c solid 3px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: white;
+}
+
+tr:hover {
+  background-color: #1bff7a73;
+}
+
+th {
+  background-color: #4caf50;
+  color: white;
+}

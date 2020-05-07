@@ -1,24 +1,54 @@
 import React from "react";
 import "../App.css";
+import createPerson from "./CreatePerson";
+import createFinRecord from "./CreateFinRecord";
+import mainDisplay from "./MainDisplay";
+import success from "./Success";
+
+import {
+  BrowserRouter,
+  Route,
+  Switch,
+  Redirect,
+  NavLink,
+} from "react-router-dom";
 
 class TopMenu extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
-      <div className="menubar">
-        <div className="MenuTop">
+      <BrowserRouter>
+        <div className="TopMenu">
+          <div className="dropdown">
+            <button className="dropbtn">
+              <NavLink to="/home">Home</NavLink>
+            </button>
+          </div>
           <div className="dropdown">
             <button className="dropbtn">Person</button>
             <div className="dropdown-content">
-              <a href="#">Create New Person</a>
-              <a href="#">Update Person</a>
+              <NavLink to="/person/create">Create New Person</NavLink>
+            </div>
+          </div>
+          <div className="dropdown">
+            <button className="dropbtn">Finance Record</button>
+            <div className="dropdown-content">
+              <NavLink to="/finrecord/create">Create Finance Record</NavLink>
             </div>
           </div>
         </div>
-      </div>
+
+        <div className="DisplayBody">
+          <Switch>
+            <Route exact path="/login" component={null} />
+            <Route exact path="/home" component={mainDisplay} />
+            <Route exact path="/person/create" component={createPerson} />
+            <Route exact path="/finrecord/create" component={createFinRecord} />
+            <Route exact path="/finrecord/update" component={createFinRecord} />
+            <Route path="/404" render={() => <div>Page Not Found</div>} />
+            <Redirect to="/404" />
+          </Switch>
+        </div>
+      </BrowserRouter>
     );
   }
 }

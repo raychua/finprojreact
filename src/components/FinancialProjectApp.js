@@ -1,7 +1,6 @@
 import React from "react";
 import "../App.css";
 import TopMenu from "./TopMenu";
-import CreatePerson from "./CreatePerson";
 
 class FinancialProjectApp extends React.Component {
   constructor(props) {
@@ -12,11 +11,8 @@ class FinancialProjectApp extends React.Component {
   render() {
     return (
       <div>
-        <div className="TopMenu">
+        <div className="Whole">
           <TopMenu />
-        </div>
-        <div>
-          <CreatePerson />
         </div>
       </div>
     );

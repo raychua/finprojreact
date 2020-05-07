@@ -1,79 +1,85 @@
-import React from "react";
+import React, { useState } from "react";
 import "../App.css";
-import "./Person.css";
 import axios from "../utils/axios";
+import { connect } from "react-redux";
+import { saveSuccess } from "../actions/Action";
 
-class CreatePerson extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: null,
-      grossIncome: 0,
-      netIncome: 0,
-    };
+function CreatePerson({ saveSuccess, history }) {
+  const [name, setName] = useState("");
+  const [grossIncome, setGrossIncome] = useState("");
+  const [netIncome, setNetIncome] = useState("");
 
-    this.handleInputChange = this.handleInputChange.bind(this);
-  }
-
-  handleInputChange(event) {
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
-    this.setState({
-      [name]: value,
-    });
-  }
-
-  submitPerson = async () => {
+  const submitPerson = async () => {
     try {
-      console.log("this.state.name", this.state.name);
-      const res = await axios.post("/v1/person", {
-        name: this.state.name,
-        grossIncome: this.state.grossIncome,
-        netIncome: this.state.netIncome,
+      await axios.post("/v1/person", {
+        name: name,
+        grossIncome: grossIncome,
+        netIncome: netIncome,
       });
+      const successObj = {
+        title: "Success",
+        message: name + " information is created successfully.",
+      };
+      saveSuccess(successObj);
+      history.push("/person/success");
     } catch (err) {
       alert(err);
     }
   };
 
-  render() {
-    return (
-      <div className="Person">
-        <div className="PersonTitle">Create a new Person</div>
-        <div className="PersonProperty">Name</div>
-        <div className="PersonField">
-          <input
-            className="inputText"
-            name="name"
-            onChange={this.handleInputChange}
-          />
-        </div>
-        <div className="PersonProperty">Gross Income</div>
-        <div className="PersonField">
-          <input
-            className="inputText"
-            name="grossIncome"
-            onChange={this.handleInputChange}
-          />
-        </div>
-        <div className="PersonProperty">Net Income</div>
-        <div className="PersonField">
-          <input
-            className="inputText"
-            name="netIncome"
-            onChange={this.handleInputChange}
-          />
-        </div>
-        <div className="ButtonBar">
-          <button className="CancelBtn">Cancel</button>
-          <button className="SubmitBtn" onClick={this.submitPerson}>
-            Submit
-          </button>
-        </div>
+  const goBack = () => {
+    history.goBack();
+  };
+
+  return (
+    <div className="EntryBox">
+      <div className="TitleBar">
+        <span className="vertalign">Create a new Person</span>
       </div>
-    );
-  }
+      <div className="Property">
+        <span className="vertalign">Name</span>
+      </div>
+      <div className="Field">
+        <input
+          className="inputText"
+          name="name"
+          onChange={(event) => setName(event.target.value)}
+        />
+      </div>
+      <div className="Property">
+        <span className="vertalign">Gross Income</span>
+      </div>
+      <div className="Field">
+        <input
+          className="inputText"
+          name="grossIncome"
+          onChange={(event) => setGrossIncome(event.target.value)}
+        />
+      </div>
+      <div className="Property">
+        <span className="vertalign">Net Income</span>
+      </div>
+      <div className="Field">
+        <input
+          className="inputText"
+          name="netIncome"
+          onChange={(event) => setNetIncome(event.target.value)}
+        />
+      </div>
+      <div className="ButtonBar">
+        <button className="CancelBtn" onClick={goBack}>
+          Cancel
+        </button>
+        <button className="SubmitBtn" onClick={submitPerson}>
+          Submit
+        </button>
+      </div>
+    </div>
+  );
 }
 
-export default CreatePerson;
+const mapDispatchToProps = (dispatch) => ({
+  saveSuccess: (successObj) => dispatch(saveSuccess(successObj)),
+});
+
+export default connect(null, mapDispatchToProps)(CreatePerson);
