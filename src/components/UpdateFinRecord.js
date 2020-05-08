@@ -18,6 +18,7 @@ function UpdateFinRecord({ saveSuccess, history, match }) {
   useEffect(() => {
     getFinRecord();
     getPeople();
+    getCategoryList();
   }, []);
 
   const getFinRecord = async () => {
@@ -107,6 +108,7 @@ function UpdateFinRecord({ saveSuccess, history, match }) {
         <select
           id="persondId"
           name="persondId"
+          value={persondId}
           onChange={(event) => setPersonId(event.target.value)}
           onBlur={(event) => setPersonId(event.target.value)}
         >
@@ -129,6 +131,7 @@ function UpdateFinRecord({ saveSuccess, history, match }) {
         <input
           className="inputText"
           name="title"
+          value={title}
           onChange={(event) => setTitle(event.target.value)}
         />
       </div>
@@ -139,6 +142,7 @@ function UpdateFinRecord({ saveSuccess, history, match }) {
         <input
           className="inputText"
           name="amount"
+          value={amount}
           onChange={(event) => setAmount(event.target.value)}
         />
       </div>
@@ -149,9 +153,9 @@ function UpdateFinRecord({ saveSuccess, history, match }) {
         <select
           id="category"
           name="category"
+          value={category}
           onChange={(event) => setCategory(event.target.value)}
           onBlur={(event) => setCategory(event.target.value)}
-          onFocus={getCategoryList}
         >
           <option value="" disabled selected>
             Select your option
@@ -172,6 +176,7 @@ function UpdateFinRecord({ saveSuccess, history, match }) {
         <select
           id="classification"
           name="classification"
+          value={classification}
           onChange={(event) => setClassification(event.target.value)}
           onBlur={(event) => setClassification(event.target.value)}
         >
