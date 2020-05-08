@@ -21,15 +21,13 @@ function MainDisplay({ saveFinRecordId, history }) {
 
   useEffect(() => {
     mainDisplay();
-    setTimeout(() => {
-      setIsLoaded(true);
-    }, 1);
   }, []);
 
   const mainDisplay = async () => {
     try {
       const returnedInfo = await axios.get("/v1/finrecords");
       setDisplayInfo(returnedInfo.data);
+      setIsLoaded(true);
     } catch (err) {
       alert(err);
     }
