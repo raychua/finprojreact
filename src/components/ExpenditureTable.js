@@ -2,10 +2,10 @@ import React from "react";
 import "./ExpenditureTable.css";
 import { withRouter } from "react-router";
 
-function ExpenditureTable({ displayInfo }) {
+function ExpenditureTable({ displayInfo, history }) {
   function UpdateFinRecord(finRecordId) {
     console.log("row.id", finRecordId);
-    //history.push("/person/update/" + finRecordId);
+    history.push("/finrecord/update/" + finRecordId);
   }
 
   return (

@@ -5,14 +5,15 @@ import axios from "../utils/axios";
 import { connect } from "react-redux";
 import { saveSuccess } from "../actions/Action";
 
-function UpdateFinRecord({ saveSuccess, history }) {
-  const [id, setId] = useState("");
+function UpdateFinRecord({ saveSuccess, history, match }) {
+  const [persondId, setPersonId] = useState("");
   const [peopleList, setPeopleList] = useState([]);
   const [categoryList, setCategoryList] = useState([]);
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
   const [category, setCategory] = useState("Insurance");
   const [classification, setClassification] = useState("Investment");
+  const [finrecord, setFinRecord] = useState({});
 
   useEffect(() => {
     getFinRecord();
@@ -21,10 +22,16 @@ function UpdateFinRecord({ saveSuccess, history }) {
 
   const getFinRecord = async () => {
     try {
-      const finRecordId = props.match.param.id;
+      console.log("params:", match.params);
+      const finRecordId = match.params.id;
       console.log("finRecordId:", finRecordId);
       const returnedInfo = await axios.get("/v1/finrecords/" + finRecordId);
-      setCategoryList(returnedInfo.data);
+      setFinRecord(returnedInfo.data);
+      setPersonId(returnedInfo.data.personId);
+      setTitle(returnedInfo.data.title);
+      setAmount(returnedInfo.data.amount);
+      setCategory(returnedInfo.data.category);
+      setClassification(returnedInfo.data.classification);
     } catch (err) {
       alert(err);
     }
@@ -50,10 +57,8 @@ function UpdateFinRecord({ saveSuccess, history }) {
 
   const submitFinRecord = async () => {
     try {
-      console.log("person:", id);
-      console.log("category:", category);
-      await axios.post("/v1/finrecords", {
-        person: id,
+      await axios.put("/v1/finrecords/" + finrecord.id, {
+        person: persondId,
         title: title,
         amount: amount,
         category: category,
@@ -62,6 +67,22 @@ function UpdateFinRecord({ saveSuccess, history }) {
       const successObj = {
         title: "Success",
         message: title + " information is updated successfully.",
+      };
+      saveSuccess(successObj);
+      history.push("/finrecords/success");
+    } catch (err) {
+      alert(err);
+    }
+  };
+
+  const deleteFinRecord = async () => {
+    try {
+      await axios.delete("/v1/finrecords/" + finrecord.id, {
+        person: persondId,
+      });
+      const successObj = {
+        title: "Success",
+        message: title + " information is deleted successfully.",
       };
       saveSuccess(successObj);
       history.push("/finrecords/success");
@@ -84,10 +105,10 @@ function UpdateFinRecord({ saveSuccess, history }) {
       </div>
       <div className="Field">
         <select
-          id="id"
-          name="id"
-          onChange={(event) => setId(event.target.value)}
-          onBlur={(event) => setId(event.target.value)}
+          id="persondId"
+          name="persondId"
+          onChange={(event) => setPersonId(event.target.value)}
+          onBlur={(event) => setPersonId(event.target.value)}
         >
           <option value="" disabled selected>
             Select your option
@@ -171,7 +192,10 @@ function UpdateFinRecord({ saveSuccess, history }) {
           Cancel
         </button>
         <button className="SubmitBtn" onClick={submitFinRecord}>
-          Submit
+          Update
+        </button>
+        <button className="DeleteBtn" onClick={deleteFinRecord}>
+          Delete
         </button>
       </div>
     </div>

@@ -136,6 +136,24 @@ a.active {
   transform: translateY(-50%);
 }
 
+.DeleteBtn {
+  background-color: #f32b2bf3;
+  color: white;
+  width: 140px;
+  font-weight: bold;
+  padding: 14px;
+  font-size: 14px;
+  border: none;
+  border-bottom: 3px solid #999999;
+  cursor: pointer;
+  margin-left: 20px;
+  margin-right: 20px;
+  position: relative;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
 .EntryBox {
   width: 40%;
   align-self: center;

@@ -2,6 +2,7 @@ import React from "react";
 import "../App.css";
 import createPerson from "./CreatePerson";
 import createFinRecord from "./CreateFinRecord";
+import updateFinRecord from "./UpdateFinRecord";
 import mainDisplay from "./MainDisplay";
 import success from "./Success";
 
@@ -44,7 +45,11 @@ class TopMenu extends React.Component {
             <Route exact path="/home" component={mainDisplay} />
             <Route exact path="/person/create" component={createPerson} />
             <Route exact path="/finrecord/create" component={createFinRecord} />
-            <Route exact path="/finrecord/update" component={createFinRecord} />
+            <Route
+              exact
+              path="/finrecord/update/:id"
+              component={updateFinRecord}
+            />
             <Route exact path="/finrecords/success" component={success} />
             <Route exact path="/person/success" component={success} />
             <Route path="/404" render={() => <div>Page Not Found</div>} />
