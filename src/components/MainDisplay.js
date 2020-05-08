@@ -9,6 +9,8 @@ import IncomeTable from "./IncomeTable";
 import SavingsTable from "./SavingsTable";
 import axios from "../utils/axios";
 import { Doughnut } from "react-chartjs-2";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import Loader from "react-loader-spinner";
 
 function MainDisplay({ saveFinRecordId, history }) {
   const [displayInfo, setDisplayInfo] = useState({
@@ -51,7 +53,9 @@ function MainDisplay({ saveFinRecordId, history }) {
 
   return (
     <div>
-      {isLoaded && (
+      {!isLoaded ? (
+        <Loader />
+      ) : (
         <section className="container">
           <div className="leftside"></div>
           <div className="line1">
