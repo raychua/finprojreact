@@ -27,6 +27,9 @@
   background-color: #4caf50;
   text-align: left;
   padding-left: 50px;
+  -webkit-box-shadow: 0 5px 6px rgb(110, 110, 110);
+  -moz-box-shadow: 0 5px 6px rgb(110, 110, 110);
+  box-shadow: 0 5px 6px rgb(110, 110, 110);
 }
 
 header > a + a {

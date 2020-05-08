@@ -1,4 +1,5 @@
 import React from "react";
+import "./ExpenditureTable.css";
 import { withRouter } from "react-router";
 
 function ExpenditureTable({ displayInfo }) {
@@ -12,35 +13,40 @@ function ExpenditureTable({ displayInfo }) {
       {displayInfo.people.map((person) => (
         <div>
           <div className="TableHeader"> {person.name}</div>
+          <div className="tableRoundCorners">
+            <table>
+              <tr>
+                <th>
+                  <b>Item</b>
+                </th>
+                <th align="right">
+                  <b>Amount</b>
+                </th>
+                <th align="center">
+                  <b>Category</b>
+                </th>
+                <th align="center">
+                  <b>Classification</b>
+                </th>
+              </tr>
 
-          <table>
-            <tr>
-              <th>
-                <b>Item</b>
-              </th>
-              <th align="right">
-                <b>Amount</b>
-              </th>
-              <th align="center">
-                <b>Category</b>
-              </th>
-              <th align="center">
-                <b>Classification</b>
-              </th>
-            </tr>
-
-            {displayInfo[person.name].map((row) => {
-              console.log("row", row);
-              return (
-                <tr key={row.title} onClick={() => UpdateFinRecord(row.id)}>
-                  <td component="th">{row.title}</td>
-                  <td align="right">${row.amount}</td>
-                  <td align="center">{row.category}</td>
-                  <td align="center">{row.classification}</td>
-                </tr>
-              );
-            })}
-          </table>
+              {displayInfo[person.name].map((row) => {
+                console.log("row", row);
+                return (
+                  <tr
+                    key={row.title}
+                    onClick={() => UpdateFinRecord(row.id)}
+                    className="expenditureRow"
+                  >
+                    <td component="th">{row.title}</td>
+                    <td align="right">${row.amount}</td>
+                    <td align="center">{row.category}</td>
+                    <td align="center">{row.classification}</td>
+                  </tr>
+                );
+              })}
+            </table>
+          </div>
         </div>
       ))}
 

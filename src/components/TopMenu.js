@@ -39,6 +39,7 @@ class TopMenu extends React.Component {
 
         <div className="DisplayBody">
           <Switch>
+            <Route exact path="/" component={mainDisplay} />
             <Route exact path="/login" component={null} />
             <Route exact path="/home" component={mainDisplay} />
             <Route exact path="/person/create" component={createPerson} />

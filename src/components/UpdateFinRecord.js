@@ -61,7 +61,7 @@ function UpdateFinRecord({ saveSuccess, history }) {
       });
       const successObj = {
         title: "Success",
-        message: title + " information is created successfully.",
+        message: title + " information is updated successfully.",
       };
       saveSuccess(successObj);
       history.push("/finrecords/success");

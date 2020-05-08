@@ -29,6 +29,12 @@
   border-bottom: #2a6b2c solid 3px;
 }
 
+.tableRoundCorners {
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+}
+
 table {
   border-collapse: collapse;
   width: 100%;
@@ -40,15 +46,15 @@ td {
   padding: 8px;
 }
 
+tr {
+  background-color: #eeececf5;
+}
+
 tr:nth-child(even) {
   background-color: white;
 }
 
-tr:hover {
-  background-color: #1bff7a73;
-}
-
 th {
-  background-color: #4caf50;
+  background-color: #0fa51463;
   color: white;
 }
