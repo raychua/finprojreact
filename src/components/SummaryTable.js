@@ -20,9 +20,11 @@ function SummaryTable({ displayInfo }) {
           console.log("row", row);
           return (
             <tr key={row.title}>
-              <td component="th">{row.category}</td>
-              <td align="right">${row.totalAmount}</td>
-              <td align="center">{row.percentage}%</td>
+              <td component="th" align="left">
+                {row.category}
+              </td>
+              <td align="right">${row.totalAmount.toFixed(2)}</td>
+              <td align="right">{row.percentage}%</td>
             </tr>
           );
         })}

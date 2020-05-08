@@ -39,20 +39,27 @@ function SavingsTable({ displayInfo }) {
           data.datasets[0].data.push(row.savings);
           return (
             <tr key={row.title}>
-              <td component="th">{row.name}</td>
-              <td align="right">${row.savings}</td>
-              <td align="center">{row.savingsPercent}%</td>
+              <td component="th" align="left">
+                {row.name}
+              </td>
+              <td align="right">${row.savings.toFixed(2)}</td>
+              <td align="right">{row.savingsPercent}%</td>
             </tr>
           );
         })}
         <tr>
-          <td component="th">
+          <td component="th" align="left">
             <b>Total</b>
           </td>
           <td align="right">
-            <b>${displayInfo.savings}</b>
+            <b>
+              $
+              {displayInfo.savings
+                ? displayInfo.savings.toFixed(2)
+                : displayInfo.savings}
+            </b>
           </td>
-          <td align="center">
+          <td align="right">
             <b>{displayInfo.savingsPercent}%</b>
           </td>
         </tr>

@@ -20,9 +20,11 @@ function IncomeTable({ displayInfo }) {
           console.log("row", row);
           return (
             <tr key={row.title}>
-              <td component="th">{row.name}</td>
-              <td align="right">${row.grossIncome}</td>
-              <td align="center">${row.netIncome}</td>
+              <td component="th" align="left">
+                {row.name}
+              </td>
+              <td align="right">${row.grossIncome.toFixed(2)}</td>
+              <td align="right">${row.netIncome.toFixed(2)}</td>
             </tr>
           );
         })}
@@ -31,10 +33,20 @@ function IncomeTable({ displayInfo }) {
             <b>Total</b>
           </td>
           <td align="right">
-            <b>${displayInfo.totalGrossIncome}</b>
+            <b>
+              $
+              {displayInfo.totalGrossIncome
+                ? displayInfo.totalGrossIncome.toFixed(2)
+                : displayInfo.totalGrossIncome}
+            </b>
           </td>
-          <td align="center">
-            <b>${displayInfo.totalNetIncome}</b>
+          <td align="right">
+            <b>
+              $
+              {displayInfo.totalNetIncome
+                ? displayInfo.totalNetIncome.toFixed(2)
+                : displayInfo.totalNetIncome}
+            </b>
           </td>
         </tr>
       </table>

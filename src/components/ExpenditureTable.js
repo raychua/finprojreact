@@ -38,9 +38,11 @@ function ExpenditureTable({ displayInfo, history }) {
                     onClick={() => UpdateFinRecord(row.id)}
                     className="expenditureRow"
                   >
-                    <td component="th">{row.title}</td>
-                    <td align="right">${row.amount}</td>
-                    <td align="center">{row.category}</td>
+                    <td component="th" align="left">
+                      {row.title}
+                    </td>
+                    <td align="right">${row.amount.toFixed(2)}</td>
+                    <td align="left">{row.category}</td>
                     <td align="center">{row.classification}</td>
                   </tr>
                 );
@@ -51,7 +53,12 @@ function ExpenditureTable({ displayInfo, history }) {
       ))}
 
       <div className="TableHeader"> Total Expenditure</div>
-      <div className="TableHeader"> ${displayInfo.totalExpenditure}</div>
+      <div className="TableHeader">
+        $
+        {displayInfo.totalExpenditure
+          ? displayInfo.totalExpenditure.toFixed(2)
+          : displayInfo.totalExpenditure}
+      </div>
     </div>
   );
 }

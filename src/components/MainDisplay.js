@@ -15,9 +15,13 @@ function MainDisplay({ saveFinRecordId, history }) {
     people: [],
     categoryExpenditures: [],
   });
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     mainDisplay();
+    setTimeout(() => {
+      setIsLoaded(true);
+    }, 1);
   }, []);
 
   const mainDisplay = async () => {
@@ -33,7 +37,12 @@ function MainDisplay({ saveFinRecordId, history }) {
     labels: ["Expenditure", "Investment"],
     datasets: [
       {
-        data: [displayInfo.expenditure, displayInfo.investment],
+        data: [
+          displayInfo.expenditure
+            ? displayInfo.expenditure.toFixed(2)
+            : displayInfo.expenditure,
+          displayInfo.investment,
+        ],
         backgroundColor: ["#FF6384", "#36A2EB"],
         hoverBackgroundColor: ["#FF6384", "#36A2EB"],
       },
@@ -41,35 +50,39 @@ function MainDisplay({ saveFinRecordId, history }) {
   };
 
   return (
-    <section className="container">
-      <div className="leftside"></div>
-      <div className="line1">
-        <div className="ExpenditureDetailsHeader"> Income & Savings</div>
-        <div className="TableHeader"> Income</div>
-        <IncomeTable displayInfo={displayInfo} />
-        <div className="TableHeader"> Savings</div>
-        <SavingsTable displayInfo={displayInfo} />
-      </div>
-      <div className="line2">
-        <div className="ExpenditureDetailsHeader"> Expenditure Details</div>
-        <ExpenditureTable displayInfo={displayInfo} />
-      </div>
-      <div className="line3">
-        <div className="ExpenditureDetailsHeader"> Overall Summary</div>
-        <div className="ExpenditureRatio">
-          <div className="h1"> Expenditure/Investment Ratio</div>
-          <div>
-            <Doughnut data={data} />
+    <div>
+      {isLoaded && (
+        <section className="container">
+          <div className="leftside"></div>
+          <div className="line1">
+            <div className="ExpenditureDetailsHeader"> Income & Savings</div>
+            <div className="TableHeader"> Income</div>
+            <IncomeTable displayInfo={displayInfo} />
+            <div className="TableHeader"> Savings</div>
+            <SavingsTable displayInfo={displayInfo} />
           </div>
-        </div>
-        <div className="VerticalSpacer"> </div>
-        <div className="TableHeader"> Expenditure Category Breakdown</div>
-        <div>
-          <SummaryTable displayInfo={displayInfo} />
-        </div>
-      </div>
-      <div className="rightside"></div>
-    </section>
+          <div className="line2">
+            <div className="ExpenditureDetailsHeader"> Expenditure Details</div>
+            <ExpenditureTable displayInfo={displayInfo} />
+          </div>
+          <div className="line3">
+            <div className="ExpenditureDetailsHeader"> Overall Summary</div>
+            <div className="ExpenditureRatio">
+              <div className="h1"> Expenditure/Investment Ratio</div>
+              <div>
+                <Doughnut data={data} />
+              </div>
+            </div>
+            <div className="VerticalSpacer"> </div>
+            <div className="TableHeader"> Expenditure Category Breakdown</div>
+            <div>
+              <SummaryTable displayInfo={displayInfo} />
+            </div>
+          </div>
+          <div className="rightside"></div>
+        </section>
+      )}
+    </div>
   );
 }
 
