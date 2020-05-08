@@ -45,6 +45,8 @@ class TopMenu extends React.Component {
             <Route exact path="/person/create" component={createPerson} />
             <Route exact path="/finrecord/create" component={createFinRecord} />
             <Route exact path="/finrecord/update" component={createFinRecord} />
+            <Route exact path="/finrecords/success" component={success} />
+            <Route exact path="/person/success" component={success} />
             <Route path="/404" render={() => <div>Page Not Found</div>} />
             <Redirect to="/404" />
           </Switch>
